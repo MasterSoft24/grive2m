@@ -21,4 +21,6 @@ RESOURCES += \
     res.qrc
 
 OTHER_FILES += \
-    COPYING
+    COPYING \
+    add/Grive2-autostart.desktop \
+    add/Grive2.desktop
