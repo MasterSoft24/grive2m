@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>grive-app-ind-active.png</file>
+        <file>grive-app-ind.svg</file>
+    </qresource>
+</RCC>
