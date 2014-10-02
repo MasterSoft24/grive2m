@@ -205,6 +205,7 @@ void MainWindow::onSyncTimer(){
     bool r=this->procFinder("grive2");
 
     if((!r)&&(SyncDir!="")){
+        stateTimer->start(600);
         QProcess p;
         p.startDetached("grive2 -p "+SyncDir);
     }

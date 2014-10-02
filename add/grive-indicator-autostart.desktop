@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/grive2m 
+Icon=/usr/share/icons/hicolor/256x256/apps/GoogleDrive.png
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Grive2 Google Drive tool
+GenericName=Grive2 Google Drive tool
+X-GNOME-FullName=Grive2 Google Drive tool
+Comment=Grive2 Google Drive Manager

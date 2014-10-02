@@ -1,0 +1,18 @@
+[Desktop Entry]
+Name=Grive2 Google Drive tool
+Name[pl]=Wskaźnik Dysku Google
+Version=0.1
+Name=Grive2 Google Drive tool
+GenericName[pl]=Wskaźnik-Dysku-Google
+X-GNOME-FullName=Grive2 Google Drive tool
+X-GNOME-FullName[pl]=Wskaźnik Dysku Google
+#Comment=Ubuntu Google Drive Client with Grive and Grive Tools
+Comment[pl]=Klient Dysku Google dla Ubuntu, używający Grive i Narzędzi Grive
+Type=Application
+Categories=Utility;GTK
+Path=/usr/bin
+Exec=/usr/bin/grive2m 
+Terminal=false
+StartupNotify=true
+Icon=/usr/share/icons/hicolor/256x256/apps/GoogleDrive.png
+
