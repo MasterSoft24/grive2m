@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
 
-    defDir="/home/ms/QT/build-grive2-gui-Desktop-Debug/";
+    defDir="";
 
             readSettings();
 
@@ -95,8 +95,9 @@ void MainWindow::readSettings(){
       SyncDir=(sett->value("SyncDir").toString().toUtf8());
       RemoteSyncPeriod=sett->value("RemoteSyncPeriod").toInt();
       ManualSync=sett->value("ManualSync").toBool();
+      NotifyState=sett->value("DisableNotifications").toBool();
 
-      procFinder("grive2");
+      //procFinder("grive2");
 
 }
 
@@ -114,13 +115,17 @@ void MainWindow::start(){
             p.startDetached("grive2 -p "+SyncDir);
         }
         else{
-            QProcess p;
-            p.startDetached("notify-send \"Another instance of Grive2 already running.\"");
+            if(!NotifyState){
+                QProcess p;
+                p.startDetached("notify-send \"Another instance of Grive2 already running.\"");
+            }
         }
     }
     else{
-        QProcess p;
-        p.startDetached("notify-send \"No one account present.\nCreate account first.\"");
+        if(!NotifyState){
+            QProcess p;
+            p.startDetached("notify-send \"No one account present.\nCreate account first.\"");
+        }
     }
 }
 
@@ -181,16 +186,20 @@ void MainWindow::onStateTimer(){
     if(r&& !procIsActive){
         if(!procIsActive){
             trayIcon->setIcon(QIcon(":/grive-app-ind-active.png"));
-            QProcess p;
-            p.startDetached("notify-send \"Grive2 are sync now\"");
+            if(!NotifyState){
+                QProcess p;
+                p.startDetached("notify-send \"Grive2 are sync now\"");
+            }
         }
         procIsActive=true;
     }
      if(!r&& procIsActive){
          if(procIsActive){
              trayIcon->setIcon(QIcon(":/grive-app-ind.svg"));
-             QProcess p;
-             p.startDetached("notify-send \"Grive2 sync ended.\"");
+             if(!NotifyState){
+                 QProcess p;
+                 p.startDetached("notify-send \"Grive2 sync ended.\"");
+             }
              stateTimer->stop();
          }
          procIsActive=false;
@@ -226,6 +235,19 @@ void MainWindow::onMorotoryTimer(){
          morotoryTimer->stop();
          morotorySync=false;
          guiActive=false;
+         this->readSettings();
+
+         if(syncTimer!=0){
+             disconnect(this,SLOT(onSyncTimer()));
+             syncTimer->stop();
+             delete(syncTimer);
+         }
+
+         if((RemoteSyncPeriod>0)&&(!ManualSync)&&(SyncDir!="")){
+             syncTimer=new QTimer();
+             syncTimer->start(RemoteSyncPeriod*1000);
+             connect(syncTimer,SIGNAL(timeout()),this,SLOT(onSyncTimer()));
+         }
      }
 }
 

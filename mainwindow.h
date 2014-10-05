@@ -60,6 +60,7 @@ public:
     QString SyncDir;
     int RemoteSyncPeriod;
     bool ManualSync;
+    bool NotifyState;
 
 
     bool procFinder(QString proc);
