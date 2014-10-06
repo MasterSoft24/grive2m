@@ -52,6 +52,9 @@ MainWindow::MainWindow(QWidget *parent)
         mainMenu->addAction("Start sync now",this,
                             SLOT(start()));
 
+        mainMenu->addAction("Terminate sync",this,
+                            SLOT(stop()));
+
         mainMenu->addSeparator();
 
         grive2Status=mainMenu->addAction("Grive2 is not active now");
@@ -128,6 +131,48 @@ void MainWindow::start(){
         }
     }
 }
+
+
+
+void MainWindow::stop(){
+
+    bool r=this->procFinder("grive2");
+    if(r){
+        QProcess p;
+        p.startDetached("killall grive2 -9");
+    }
+}
+
+
+
+void MainWindow::runInTerm(){
+
+    if(morotorySync) return;
+
+    bool r=this->procFinder("grive2");
+
+    if((SyncDir!="")&&(AccountEmail!="")){
+        if(!r){
+            stateTimer->start(600);
+            QProcess p;
+            p.startDetached("xterm grive2 -p "+SyncDir);
+        }
+        else{
+            if(!NotifyState){
+                QProcess p;
+                p.startDetached("notify-send \"Another instance of Grive2 already running.\"");
+            }
+        }
+    }
+    else{
+        if(!NotifyState){
+            QProcess p;
+            p.startDetached("notify-send \"No one account present.\nCreate account first.\"");
+        }
+    }
+
+}
+
 
 bool MainWindow::procFinder(QString proc){
 

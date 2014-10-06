@@ -68,6 +68,8 @@ public:
 
 private slots:
     void start();
+    void stop();
+    void runInTerm();
     void quit();
     void mngAcc();
     void mngFlist();
