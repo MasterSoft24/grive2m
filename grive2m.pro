@@ -23,4 +23,5 @@ RESOURCES += \
 OTHER_FILES += \
     COPYING \
     add/Grive2-autostart.desktop \
-    add/Grive2.desktop
+    add/Grive2.desktop \
+    README.MD
