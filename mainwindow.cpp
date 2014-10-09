@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
         procIsActive=false;
         guiActive=false;
         morotorySync=false;
+        syncTimer=0;
 
         stateTimer=new QTimer();
         connect(stateTimer,SIGNAL(timeout()),this,SLOT(onStateTimer()));
