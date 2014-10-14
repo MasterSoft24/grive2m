@@ -15,10 +15,24 @@ grive2m uses qmake to build:
 3. cd to unpacking directory
 4. mkdir build
 5. cd build
-6. gmake ../
+6. qmake ../
 7. make
 
 Resulting binary file you can copy to destination folder e.g. /usr/bin
+
+Notice for Ubuntu users:
+	If application tray icon shows on top left corner instead system tray area you need make follow actions:
+	
+	sudo apt-add-repository ppa:gurqn/systray-trusty
+	sudo apt-get update
+	sudo apt-get upgrade
+	
+	and reboot...
+	
+This is known bugs. See 
+http://stoflru.org/out.php?link=https://bugreports.qt-project.org/browse/QTBUG-31762?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel
+for details.
+This problem was been reproduced at least on Ubuntu 14.04
 
 
 Enjoy!
