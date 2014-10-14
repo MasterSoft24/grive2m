@@ -19,7 +19,7 @@
 */
 
 #include "mainwindow.h"
-
+#include <QApplication>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -210,7 +210,8 @@ bool MainWindow::procFinder(QString proc){
 
 
 void MainWindow::quit(){
-this->close();
+    this->close();
+    QApplication::exit();
 }
 
 void MainWindow::mngAcc(){
