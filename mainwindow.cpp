@@ -211,6 +211,7 @@ bool MainWindow::procFinder(QString proc){
 
 void MainWindow::quit(){
 this->close();
+QApplication::exit();
 }
 
 void MainWindow::mngAcc(){
